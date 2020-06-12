@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: paho-cpp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: paho-cpp
+  template:
+    metadata:
+      labels:
+        app: paho-cpp
+    spec:
+      imagePullSecrets:
+        - name: gcr-json-key
+      containers:
+        - name: paho-cpp
+          image: tekn0ir/paho-app-cpp:arm32v6
+          imagePullPolicy: Always
+          securityContext:
+            privileged: true
+          env:
+            - name: HMQ_SERVICE_HOST
+              value: "hmq.kube-system"
+            - name: HMQ_SERVICE_PORT
+              value: "1883"
+            - name: MQTT_IN_0
+              value: "paho-cpp/images"
+            - name: MQTT_OUT_0
+              value: "paho-cpp/results"
