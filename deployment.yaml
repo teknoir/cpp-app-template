@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: paho-cpp
+  name: teknoir-app-cpp-template
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: paho-cpp
+      app: teknoir-app-cpp-template
   template:
     metadata:
       labels:
-        app: paho-cpp
+        app: teknoir-app-cpp-template
     spec:
       imagePullSecrets:
         - name: gcr-json-key
       containers:
-        - name: paho-cpp
-          image: tekn0ir/paho-app-cpp:arm32v6
+        - name: teknoir-app-cpp-template
+          image: tekn0ir/teknoir-app-cpp:latest
           imagePullPolicy: Always
           securityContext:
             privileged: true
@@ -26,6 +26,6 @@ spec:
             - name: HMQ_SERVICE_PORT
               value: "1883"
             - name: MQTT_IN_0
-              value: "paho-cpp/images"
+              value: "teknoir-app-cpp-template/input"
             - name: MQTT_OUT_0
-              value: "paho-cpp/results"
+              value: "teknoir-app-cpp-template/output"
