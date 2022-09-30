@@ -1,5 +1,5 @@
 # find the Paho MQTT C library
-set(_PAHO_MQTT_C_LIB_NAME paho-mqtt3as)
+set(_PAHO_MQTT_C_LIB_NAME paho-mqtt3a)
 find_package(OpenSSL REQUIRED)
 
 find_library(PAHO_MQTT_C_LIBRARIES NAMES ${_PAHO_MQTT_C_LIB_NAME})

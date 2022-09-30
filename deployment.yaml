@@ -1,31 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: teknoir-app-cpp-template
+  name: teknoir-app-cpp
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: teknoir-app-cpp-template
+      app: teknoir-app-cpp
   template:
     metadata:
       labels:
-        app: teknoir-app-cpp-template
+        app: teknoir-app-cpp
     spec:
       imagePullSecrets:
         - name: gcr-json-key
       containers:
-        - name: teknoir-app-cpp-template
-          image: tekn0ir/teknoir-app-cpp:latest
+        - name: teknoir-app-cpp
+          image: gcr.io/teknoir/teknoir-app-cpp:latest
           imagePullPolicy: Always
           securityContext:
             privileged: true
           env:
             - name: HMQ_SERVICE_HOST
-              value: "hmq.kube-system"
+              value: "mqtt.kube-system"
             - name: HMQ_SERVICE_PORT
               value: "1883"
             - name: MQTT_IN_0
-              value: "teknoir-app-cpp-template/input"
+              value: "teknoir-app-cpp/input"
             - name: MQTT_OUT_0
-              value: "teknoir-app-cpp-template/output"
+              value: "teknoir-app-cpp/output"
