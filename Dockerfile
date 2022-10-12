@@ -27,7 +27,7 @@ COPY --from=paho_build ${PAHO_MQTT_HOME}/include /usr/include
 
 WORKDIR /app
 ADD app /app
-RUN ls -la /usr/lib/ && cmake -Bbuild -H. -DCMAKE_INSTALL_PREFIX=/app && \
+RUN cmake -Bbuild -H. -DCMAKE_INSTALL_PREFIX=/app && \
     cmake --build build/ --target install
 
 ##########################
@@ -36,4 +36,5 @@ FROM debian:stable-slim
 WORKDIR /usr/bin
 COPY --from=app_build /app/bin /usr/bin
 
+STOPSIGNAL SIGINT
 CMD ["/usr/bin/teknoir-app"]
